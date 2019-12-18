@@ -5,6 +5,7 @@ public class ArrayManipulation {
 	
 
 	public static MyRGB[][] smoothArray(MyRGB[][] arr) {
+		//smoothing
 		MyRGB[][] array=arr;
 		if(array.length>=3&&array[0].length>=3) {
 			for(int i=1; i<array.length-1;i++) {

@@ -4,6 +4,7 @@ public class ArrayGen {
 	
 	
 	public static MyRGB[][] fillRGB(int size){
+		//fills an square array with RGB pixels of random value to represent a RGB image
 		MyRGB[][] array = new MyRGB[size][size];
 		for(int i= 0; i< array.length;i++) {
 			for(int k= 0; k < array[i].length; k++) {
@@ -20,6 +21,7 @@ public class ArrayGen {
 		return fillArray(255, new int[size][size]);
 	}
 	private static int[][] fillArray(int upperBound, int[][] array) {
+		//fills an square array with random numbers to represent a B&W image
 		for(int i= 0; i< array.length;i++) {
 			for(int k= 0; k < array[i].length; k++) {
 				array[i][k] =(int) (Math.random()*upperBound);
@@ -63,6 +65,7 @@ public class ArrayGen {
 	}
 	
 	public static int[][] trimArray(int[][] array){
+		//trims the arrays 4 edges
 		int[][] trimarray = new int[array.length-2][array.length-2];
 		
 		for(int i= 0; i< array.length-2;i++) {
