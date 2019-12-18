@@ -26,22 +26,24 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         
-        int [][] array = ArrayGen.randomSquareArray(100);
+        //int [][] array = ArrayGen.randomSquareArray(100);
         
 		//ArrayGen.printArray(array);
 		System.out.println("Smmothing");
 		
 		//drawArray(array,0 ,gc);
-		MyRGB[][] array2 =ArrayGen.fillRGB(50);
-		drawArray(array2,0,gc);
+		int[][] array = ArrayGen.randomSquareArray(6);
 		
-		drawArray(ArrayGen.smoothArray(array2),1,gc);
+		drawArray(array,0,gc);
+		drawArray(ArrayManipulation.smoothArray(array),1,gc);
     }
 
     
-    public void drawRect(GraphicsContext gc, double scale, int x, int y, int size) {
+    public void drawRect(GraphicsContext gc, Double scale, int x, int y, int size) {
     	gc.setFill(Color.gray(scale));
     	gc.fillRect(x, y, size, size);
+    	//gc.setFill(Color.GREEN);
+    	//gc.fillText(((Integer)((Double)(scale*255)).intValue()).toString(), (int)x+size/2,(int) y+size/2, size);
     }
     
     public void drawArray(int[][] array,int slot , GraphicsContext gc) {

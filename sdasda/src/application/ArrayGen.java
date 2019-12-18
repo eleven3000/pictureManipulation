@@ -28,53 +28,49 @@ public class ArrayGen {
 		return array;
 	}
 	
-
-	public static MyRGB[][] smoothArray(MyRGB[][] arr) {
-		MyRGB[][] array=arr;
-		if(array.length>=3&&array[0].length>=3) {
-			for(int i=1; i<array.length-1;i++) {
-				for(int k=1; k<array[i].length-1;k++) {
-					int avgr=0;
-					int avgg=0;
-					int avgb=0;
-					for(int p=-1; p<2; p++) {
-						for(int q=-1; q<2; q++) {
-							avgr+=array[i+p][k+q].getR();
-							avgg+=array[i+p][k+q].getG();
-							avgb+=array[i+p][k+q].getB();
-						}
-					}
-					avgr= (avgr/9);
-					avgg= (avgg/9);
-					avgb= (avgb/9);
-					array[i][k].setR(avgr);
-					array[i][k].setG(avgg);
-					array[i][k].setB(avgb);
-				}
+	
+	public static int[][] extendArray(int[][] array){
+		int[][] newarray = new int[array.length+2][array.length+2];
+		
+		//copy middle part
+		for(int i= 0; i< array.length;i++) {
+			for(int k= 0; k < array[i].length; k++) {
+				newarray[i+1][k+1] = array[i][k];
 			}
 		}
-		return array;
+		//fill edges
+		for(int k= 1; k<array.length+1; k++) {
+			newarray[0][k] = array[0][k-1];
+		}
+		for(int k= 1; k<array.length+1; k++) {
+			newarray[newarray.length-1][k] = array[array.length-1][k-1];
+		}
+		for(int i= 1; i<array.length+1; i++) {
+			newarray[i][0] = array[i-1][0];
+		}
+		for(int i= 1; i<array.length+1; i++) {
+			newarray[i-1][newarray.length-1] = array[i-1][array.length-1];
+		}
+		//fill corners
+		newarray[0][0] = (newarray[1][0] +newarray[0][1])/2;
+		newarray[newarray.length-1][0] = (newarray[newarray.length-2][0] +newarray[newarray.length-1][1])/2;
+		newarray[0][newarray.length-1] = (newarray[1][newarray.length-1] +newarray[0][newarray.length-2])/2;
+		newarray[newarray.length-1][newarray.length-1] = (newarray[newarray.length-1][newarray.length-2] +newarray[newarray.length-2][newarray.length-1])/2;
+		
+		//return
+		return newarray;
+		
 	}
 	
-	
-	
-	public static int[][] smoothArray(int[][] arr) {
-		int [][] array=arr;
-		if(array.length>=3&&array[0].length>=3) {
-			for(int i=1; i<array.length-1;i++) {
-				for(int k=1; k<array[i].length-1;k++) {
-					int avg=0;
-					for(int p=-1; p<2; p++) {
-						for(int q=-1; q<2; q++) {
-							avg+=array[i+p][k+q];
-						}
-					}
-					avg= (avg/9);
-					array[i][k]= avg;
-				}
+	public static int[][] trimArray(int[][] array){
+		int[][] trimarray = new int[array.length-2][array.length-2];
+		
+		for(int i= 0; i< array.length-2;i++) {
+			for(int k= 0; k < array[i].length-2; k++) {
+				trimarray[i][k] = array[i+1][k+1];
 			}
 		}
-		return array;
+		return trimarray;
 	}
 	
 	public static void printArray(int[][] array) {
